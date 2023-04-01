@@ -1,0 +1,1 @@
+dividedBy(a,b,d,&n)
