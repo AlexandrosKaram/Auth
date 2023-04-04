@@ -151,6 +151,6 @@ Box& Box::operator/=(int n){
 
 // output
 ostream& operator<<(ostream& os, const Box& A){
-    os << "length:" << A.x << ", width:" << A.y << ", height:" << A.z;
+    os << "length: " << A.x << ", width: " << A.y << ", height: " << A.z;
   return os;
 }
