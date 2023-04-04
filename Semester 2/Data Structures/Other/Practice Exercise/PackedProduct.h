@@ -1,4 +1,6 @@
 # pragma once
+#include "Date.h"
+#include "Product.h"
 // Declare class PackedProduct.
 
 class PackedProduct: public Product {
@@ -8,5 +10,5 @@ class PackedProduct: public Product {
     public:
         // constructors
         PackedProduct();
-        PackedProduct(char*, Date, int, bool, int, Date);
+        PackedProduct(char *name, Date exp, int grams, bool open, int lifetime, Date opened);
 };  

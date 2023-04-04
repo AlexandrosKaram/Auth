@@ -1,6 +1,5 @@
 // Implement class Product.
 #include "Product.h"
-#include "Date.h"
 
 // constructors
 Product:: Product(){};
