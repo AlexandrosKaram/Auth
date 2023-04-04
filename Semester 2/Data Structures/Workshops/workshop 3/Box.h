@@ -24,14 +24,14 @@ class Box {
         // operators
         
         // object with constant
-        Box& operator*(double);
-        Box& operator/(double);
-        Box& operator+(double);
-        Box& operator-(double);
+        Box operator*(double);
+        Box operator/(double);
+        Box operator+(double);
+        Box operator-(double);
         
         // object with object
-        Box& operator+(Box); 
-        Box& operator-(Box); 
+        Box operator+(Box); 
+        Box operator-(Box); 
         Box& operator=(Box); 
 
         // boolean

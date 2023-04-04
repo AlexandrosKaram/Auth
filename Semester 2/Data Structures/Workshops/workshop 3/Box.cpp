@@ -24,47 +24,36 @@ void Box:: setZ(double z){this->z = z;}
 // operators
 
 // object with constant
-Box& Box:: operator*(double n){
-    x = x*n;
-    y = y*n;
-    z = z*n;
-    return *this;
+Box Box:: operator*(double n){
+    Box temp(x*n, y*n, z*n);
+    return temp;
 }
 
-Box& Box:: operator/(double n){
-    x = x/n;
-    y = y/n;
-    z = z/n;
-    return *this;
+Box Box:: operator/(double n){
+    Box temp(x/n, y/n, z/n);
+    return temp;
 }
 
-Box& Box:: operator+(double n){
-    x = x+n;
-    y = y+n;
-    z = z+n;
-    return *this;
+Box Box:: operator+(double n){
+    Box temp(x+n, y+n, z+n);
+    return temp;
 }
 
-Box& Box:: operator-(double n){
-    x = x-n;
-    y = y-n;
-    z = z-n;
-    return *this;
+Box Box:: operator-(double n){
+    Box temp(x-n, y-n, z-n);
+    return temp;
 }
+
 
 // object with object
-Box& Box:: operator+(Box A){
-    x = x+A.x;
-    y = y+A.y;
-    z = z+A.z;
-    return *this;
+Box Box:: operator+(Box A){
+    Box temp(x+A.x, y+A.y, z+A.z);
+    return temp;
 }
 
-Box& Box:: operator-(Box A){
-    x = x-A.x;
-    y = y-A.y;
-    z = z-A.z;
-    return *this;
+Box Box:: operator-(Box A){
+    Box temp(x-A.x, y-A.y, z-A.z);
+    return temp;
 }
 
 Box& Box:: operator=(Box A){
@@ -90,9 +79,9 @@ bool Box:: operator!=(Box A){
 // prefix increment
 Box& Box::operator++()
 {
-   this->x++;
-   this->y++;
-   this->z++;
+   x++;
+   y++;
+   z++;
    return *this;
 }
 
@@ -107,9 +96,9 @@ Box Box::operator++(int)
 // prefix decrement
 Box& Box::operator--()
 {
-   this->x--;
-   this->y--;
-   this->z--;
+   x--;
+   y--;
+   z--;
    return *this;
 }
 
