@@ -28,24 +28,28 @@ Box& Box:: operator*(double n){
     x = x*n;
     y = y*n;
     z = z*n;
+    return *this;
 }
 
 Box& Box:: operator/(double n){
     x = x/n;
     y = y/n;
     z = z/n;
+    return *this;
 }
 
 Box& Box:: operator+(double n){
     x = x+n;
     y = y+n;
     z = z+n;
+    return *this;
 }
 
 Box& Box:: operator-(double n){
-    x = x+n;
-    y = y+n;
-    z = z+n;
+    x = x-n;
+    y = y-n;
+    z = z-n;
+    return *this;
 }
 
 // object with object
@@ -53,6 +57,7 @@ Box& Box:: operator+(Box A){
     x = x+A.x;
     y = y+A.y;
     z = z+A.z;
+    return *this;
 }
 
 Box& Box:: operator-(Box A){
@@ -65,6 +70,7 @@ Box& Box:: operator=(Box A){
     x = A.x;
     y = A.y;
     z = A.z;
+    return *this;
 }
 
 // boolean
@@ -83,9 +89,9 @@ bool Box:: operator!=(Box A){
 // prefix increment
 Box& Box::operator++()
 {
-   x++;
-   y++;
-   z++;
+   this->x++;
+   this->y++;
+   this->z++;
    return *this;
 }
 
@@ -100,9 +106,9 @@ Box Box::operator++(int)
 // prefix decrement
 Box& Box::operator--()
 {
-   x--;
-   y--;
-   z--;
+   this->x--;
+   this->y--;
+   this->z--;
    return *this;
 }
 
@@ -119,27 +125,32 @@ Box& Box::operator+=(int n){
     this->x+=n;
     this->y+=n;
     this->z+=n;
+    return *this;
 }
 
 Box& Box::operator-=(int n){
     this->x-=n;
     this->y-=n;
     this->z-=n;
+    return *this;
 }
 
 Box& Box::operator*=(int n){
     this->x*=n;
     this->y*=n;
     this->z*=n;
+    return *this;
 }
 
 Box& Box::operator/=(int n){
     this->x/=n;
     this->y/=n;
     this->z/=n;
+    return *this;
 }
 
 // output
 ostream& operator<<(ostream& os, const Box& A){
     os << "length:" << A.x << ", width:" << A.y << ", height:" << A.z;
+  return os;
 }
