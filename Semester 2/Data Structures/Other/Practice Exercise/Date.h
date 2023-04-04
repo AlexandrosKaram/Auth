@@ -19,6 +19,4 @@ class Date{
         int daysInMonth(int);
         void add(int);
         int diff(Date);
-        // operators
-        int operator-(Date);
 };

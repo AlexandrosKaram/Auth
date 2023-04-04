@@ -57,24 +57,18 @@ void Date:: add(int k){
 }
 
 int Date:: diff(Date b){
-    return *this-b;
-}
-
-// operators
-
-int Date:: operator-(Date b){
-    int _dayA=0, _dayB=0;
+    int dayA=0, dayB=0;
 
     // Convert day and month to a number/365.
     for (int i=1;i<month;i++){
-        _dayA += daysInMonth(i);
+        dayA += daysInMonth(i);
     }
-    _dayA += day;
+    dayA += day;
 
     for (int i=1;i<b.month;i++){
-        _dayB += daysInMonth(i);
+        dayB += daysInMonth(i);
     }
-    _dayB += b.day;
+    dayB += b.day;
 
-    return (b.year - year)*365 + _dayB - _dayA; 
+    return (b.year - year)*365 + dayB - dayA; 
 }
