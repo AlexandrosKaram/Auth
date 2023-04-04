@@ -11,4 +11,6 @@ class PackedProduct: public Product {
         // constructors
         PackedProduct();
         PackedProduct(char *name, Date exp, int grams, bool open, int lifetime, Date opened);
+        // methods
+        Date getExpiry();
 };  

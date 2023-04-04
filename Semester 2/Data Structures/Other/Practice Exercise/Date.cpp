@@ -41,7 +41,7 @@ int Date:: daysInMonth(int m){
     }
 }
 
-void Date:: add(int k){
+Date Date:: add(int k){
     int dim = daysInMonth(month);
     if (k > dim-day){
         if (month==12){
@@ -54,6 +54,7 @@ void Date:: add(int k){
     }else{
         day += k;
     }
+    return *this;
 }
 
 int Date:: diff(Date b){

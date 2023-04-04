@@ -17,6 +17,6 @@ class Date{
         void setYear(int);
         // methods
         int daysInMonth(int);
-        void add(int);
+        Date add(int);
         int diff(Date);
 };
