@@ -64,6 +64,7 @@ Box& Box:: operator-(Box A){
     x = x-A.x;
     y = y-A.y;
     z = z-A.z;
+    return *this;
 }
 
 Box& Box:: operator=(Box A){
