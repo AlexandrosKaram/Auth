@@ -2,9 +2,9 @@
 // Declare class Product.
 
 class Product{
-    char name[20];
-    int grams;
+    char *name;
     Date exp;
+    int grams;
     public:
         // constructors
         Product();
