@@ -49,16 +49,22 @@ Box& Box:: operator-(double n){
 }
 
 // object with object
-Box Box:: operator+(Box A){
-    return Box(x+A.x, y+A.y + z+A.z);
+Box& Box:: operator+(Box A){
+    x = x+A.x;
+    y = y+A.y;
+    z = z+A.z;
 }
 
-Box Box:: operator-(Box A){
-    return Box(x-A.x, y-A.y, z-A.z);
+Box& Box:: operator-(Box A){
+    x = x-A.x;
+    y = y-A.y;
+    z = z-A.z;
 }
 
-Box Box:: operator=(Box A){
-    return A;
+Box& Box:: operator=(Box A){
+    x = A.x;
+    y = A.y;
+    z = A.z;
 }
 
 // boolean
@@ -77,16 +83,16 @@ bool Box:: operator!=(Box A){
 // prefix increment
 Box& Box::operator++()
 {
-   this->x++;
-   this->y++;
-   this->z++;
+   x++;
+   y++;
+   z++;
    return *this;
 }
 
 // postfix increment
 Box Box::operator++(int)
 {
-   Point temp = *this;
+   Box temp = *this;
    ++*this;
    return temp;
 }
@@ -94,16 +100,16 @@ Box Box::operator++(int)
 // prefix decrement
 Box& Box::operator--()
 {
-   this->x--;
-   this->y--;
-   this->z--;
+   x--;
+   y--;
+   z--;
    return *this;
 }
 
 // postfix decrement
-Point Point::operator--(int)
+Box Box::operator--(int)
 {
-   Point temp = *this;
+   Box temp = *this;
    --*this;
    return temp;
 }

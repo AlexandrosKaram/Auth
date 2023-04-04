@@ -30,9 +30,9 @@ class Box {
         Box& operator-(double);
         
         // object with object
-        Box operator+(Box); 
-        Box operator-(Box); 
-        Box operator=(Box); 
+        Box& operator+(Box); 
+        Box& operator-(Box); 
+        Box& operator=(Box); 
 
         // boolean
         bool operator==(Box);
