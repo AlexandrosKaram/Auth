@@ -5,7 +5,7 @@
 Product:: Product(){};
 
 Product:: Product(char* name, Date exp, int grams){
-    this->name = name;
+    strcpy(this->name, name);
     this->exp = exp;
     this->grams = grams;
 }

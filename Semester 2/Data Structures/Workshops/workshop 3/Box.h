@@ -5,8 +5,8 @@ using namespace std;
 
 // Declare class Box.
 class Box {
-    public:
         double x,y,z; // dimensions
+    public:
         // constructors
         Box();
         Box(double, double, double);

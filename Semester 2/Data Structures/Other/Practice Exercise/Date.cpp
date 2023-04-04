@@ -1,6 +1,7 @@
 // Implement class Date.
 #include "Date.h"
 #include <iostream>
+using namespace std;
 
 // constructors
 Date:: Date(){};
@@ -27,12 +28,17 @@ void Date:: setYear(int year){this->year = year;}
 
 // methods
 int Date:: daysInMonth(int m){
-    if (m==2)
-        return 28;
-    else if (m%2)
-        return 31;
-    else 
-        return 30;
+    switch (m){
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            return 30;
+        case 2:
+            return 28;
+        default:
+            return 31;
+    }
 }
 
 void Date:: add(int k){
@@ -57,21 +63,18 @@ int Date:: diff(Date b){
 // operators
 
 int Date:: operator-(Date b){
-    int diff, _dayA, _dayB;
+    int _dayA=0, _dayB=0;
 
     // Convert day and month to a number/365.
-    for (int i=1;i<_dayA;i++){
+    for (int i=1;i<month;i++){
         _dayA += daysInMonth(i);
     }
     _dayA += day;
 
-    for (int i=1;i<_dayB;i++){
+    for (int i=1;i<b.month;i++){
         _dayB += daysInMonth(i);
     }
     _dayB += b.day;
 
-    // Add the years apart too
-    diff = _dayB-_dayA + (b.year-year)*365;
-
-    return diff;
+    return (b.year - year)*365 + _dayB - _dayA; 
 }
