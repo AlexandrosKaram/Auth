@@ -101,9 +101,9 @@ int main()
                           e = Fridge[i]->getExpiry();
                           int lt = today.diff(e);
                           if (lt<0 )
-                              cout<<Fridge[i]->getName()<<" expired!!!"<<endl;
+                              cout<<Fridge[i]->Getname()<<" expired!!!"<<endl;
                           else
-                              cout<<Fridge[i]->getName()<<" expires in "<<lt<<" days!"<<endl;
+                              cout<<Fridge[i]->Getname()<<" expires in "<<lt<<" days!"<<endl;
                       }
         }
 

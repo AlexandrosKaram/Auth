@@ -14,15 +14,4 @@ Product:: Product(char* name, Date exp, int grams){
 // getters
 Date Product:: getExpiry(){return exp;}
 
-char* Product:: getName(){return name;}
-
-int Product:: getGrams(){return grams;}
-
-// setters
-void Product:: setExpiry(Date exp){this->exp = exp;}
-
-void Product:: setName(char *name){this->name = name;}
-
-void Product:: setGrams(int grams){this->grams = grams;}
-
-
+char* Product:: Getname(){return name;}
