@@ -15,7 +15,7 @@ private:
   char *username;
 
   // Every customer has a cart with up to 3 products
-  Product *shoppingCart[MAX_ITEMS];
+  Product *shoppingCart[MAX_ITEMS]; 
 
   // The next free position in the shopping cart (initially this is 0)
   // int pos;
