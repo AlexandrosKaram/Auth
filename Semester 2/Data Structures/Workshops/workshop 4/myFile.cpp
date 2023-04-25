@@ -23,9 +23,8 @@ int myFile:: countLines(){ // counts the file's lines
     f.open(name); // open file
     if (f.is_open()) { // making sure file exists
         string line; // yep, use can directly use string in c++
-        int cnt = 0;
-        while (f.peek() != EOF){
-            getline(f, line);
+        int cnt = 1; // starting from 1 so it counts blank line in the end
+        while (getline(f, line)) {
             cnt++;
         }
         f.close();
