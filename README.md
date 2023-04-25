@@ -1,8 +1,6 @@
-# Όλες οι βαθμολογούμενες (και μη) ασκήσεις κάθε εξαμήνου 
-# All of the gradeable (and non-gradeable) exercises of each semester
+# Όλες οι βαθμολογούμενες (και μη) ασκήσεις κάθε εξαμήνου / All of the gradeable (and non-gradeable) exercises of each semester
 
-## Παρακαλώ μην αντιγράφετε τις λύσεις 
-## Please do not copy the solutions
+## Παρακαλώ μην αντιγράφετε τις λύσεις / Please do not copy the solutions
 
 Οι ασκήσεις έχουν ανεβεί ώστε ο καθένας που χρειάζεται βοήθεια για την επίλυση τους
 να έχει έναν εύκολο τρόπο να τη λάβει. Ωστόσο, δεν επιτρέπεται το καθαρό copy-paste
