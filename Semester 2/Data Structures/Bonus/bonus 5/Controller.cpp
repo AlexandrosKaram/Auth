@@ -3,7 +3,8 @@
 #include <fstream>
 #include <string>
 #include <cstring>
-#include "overloads.h"
+#include <iostream>
+using namespace std;
 
 // saves an array of products in a text file
 void Controller:: save(Product products[], const char *filename, int num) {
@@ -12,7 +13,8 @@ void Controller:: save(Product products[], const char *filename, int num) {
    
    if (f.is_open()){    // making sure no errors occure
     for (int i=0;i<num;i++){
-        f << products[i];
+        f << products[i].getName() << endl;
+        f << products[i].getPrice() << endl;
     }
    }
    f.close();

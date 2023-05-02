@@ -7,7 +7,7 @@
 using namespace std;
 
 ostream &operator<<(ostream &os, Product &product) {
-    os << product.getName() << " " << product.getPrice() << endl;
+    os << product.getName() << " " << product.getPrice();
     return os;
 }
 
