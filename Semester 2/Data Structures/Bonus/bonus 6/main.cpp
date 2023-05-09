@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    Pair <int>  a(13,25);
+    Pair <int> a(13,25);
     Pair <string> b;
     string s;
 
