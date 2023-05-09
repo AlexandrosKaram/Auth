@@ -1,6 +1,12 @@
 # pragma once
 // declaration of class Pair
-template <class X> class Pair {
+
+// includes
+#include <iostream>
+
+// class
+template <class X> 
+class Pair {
     private:
         X a,b;
     public:
@@ -15,4 +21,7 @@ template <class X> class Pair {
         X getSecond();
         // methods
         void swap(); // method that swaps the 2 variables' values
+        // overloads
+        template <class X>
+        friend ostream& operator<<(ostream& os, const Pair<X>& pair); // overloads >> operator
 };

@@ -2,6 +2,7 @@
 
 // includes
 #include "Pair.h"
+using namespace std;
 
 // class
 template <class X> Pair <X>:: Pair(){   // default constructor
@@ -34,4 +35,9 @@ template <class X> void Pair <X>:: swap(){   // swaps the 2 vars' values
     temp = a;
     a = b;
     b = temp;
+}
+
+template<class X>
+ostream& operator<<(ostream& os, const Pair<X>& pair){   // overloads >> operator
+    cout << a << "," << b << endl;
 }
