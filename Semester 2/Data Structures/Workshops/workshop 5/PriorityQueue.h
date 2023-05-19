@@ -1,5 +1,4 @@
-# ifndef PRIORITYQUEUE_H
-# define PRIORITYQUEUE_H
+# pragma once
 // class PriorityQueue
 
 // includes
@@ -137,13 +136,11 @@ void PriorityQueue <X>:: shiftQueue(int pos) {   // shifts all objects from a ce
 template <class X>
 void PriorityQueue <X>:: placeInQueue(X key) {   // places key in the queue in descending order
     // loop through the queue to place key correctly
-    for (int i=0 ; i<=rear ; i++){
-        if (key < queue[i]){
+    for (int i=rear ; i>=0 ; i--){
+        if (key > queue[i]){
             shiftQueue(i);
             queue[i] = key;
             break;
         }
     }
 }
-
-# endif
