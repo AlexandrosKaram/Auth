@@ -1,4 +1,5 @@
-# pragma once
+# ifndef PRIORITYQUEUE_H
+# define PRIORITYQUEUE_H
 // class PriorityQueue
 
 // includes
@@ -9,7 +10,7 @@ using namespace std;
 template <class X>
 class PriorityQueue{
 private:
-    X queue;   // X type queue
+    X* queue;   // X type queue
     int front, rear, maxSize;   // index of front and rear object
 public:
     PriorityQueue();   // constructor
@@ -44,13 +45,13 @@ PriorityQueue <X>:: ~PriorityQueue() {   // destructor
 template <class X>
 bool PriorityQueue <X>:: enQueue(X key){   // puts X type key in queue
     if (rear == maxSize-1){
-        cout << "Not enough space. Requesting more..."
+        cout << "Not enough space. Requesting more...";
         // attempt to expand queue to place item accordingly 
         if (resizeQueue(5)){
-            cout << "Space found. Moving data..."
-            placeInQueue(X key);
+            cout << "Space found. Moving data...";
+            placeInQueue(key);
         } else {
-            cout << "Space not found. Stopping."
+            cout << "Space not found. Stopping.";
             return false;
         }
     } else if (front == -1){   // means queue is empty so we initialize it
@@ -58,7 +59,7 @@ bool PriorityQueue <X>:: enQueue(X key){   // puts X type key in queue
         rear = 0;
         queue[0] = key;
     } else {
-        placeInQueue(X key);
+        placeInQueue(key);
     }
     return true;
 }
@@ -66,7 +67,7 @@ bool PriorityQueue <X>:: enQueue(X key){   // puts X type key in queue
 template <class X>
 bool PriorityQueue <X>:: deQueue(X &key) {   // removes queue's first object
     if (front == -1){
-        cout << "Array empty..."
+        cout << "Array empty...";
         return false;
     } else {
         key = queue[0];
@@ -77,11 +78,11 @@ bool PriorityQueue <X>:: deQueue(X &key) {   // removes queue's first object
 
         // checks if there is need to free space
         if (maxSize-rear-1 <= 5) {
-            cout << "Too much available space. Deleting extra memory..."
+            cout << "Too much available space. Deleting extra memory...";
             if (resizeQueue(-5)) {
-                cout << "Extra space deleted."
+                cout << "Extra space deleted.";
             } else {
-                cout << "Could not delete extra space."
+                cout << "Could not delete extra space.";
             }
         }
     }
@@ -107,7 +108,7 @@ bool PriorityQueue <X>:: resizeQueue(int x) {   // resizes queue by x positions 
     int newSize = maxSize+x;
     X* temp = new X[newSize];   // make it pointer so i can copy later
 
-    if (temp == null) return false;   // error
+    // if (temp == null) return false;   // error
     
     // copy elements from old array
     for (int i=0 ; i<=rear ; i++) {
@@ -144,3 +145,5 @@ void PriorityQueue <X>:: placeInQueue(X key) {   // places key in the queue in d
         }
     }
 }
+
+# endif

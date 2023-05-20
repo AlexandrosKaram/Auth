@@ -1,4 +1,5 @@
-# pragma once
+# ifndef POINT2D_H
+# define POINT2D_H
 // class Point2D
 
 // includes
@@ -11,7 +12,8 @@ class Point2D {
 private:
     int x,y;
 public:
-    Point2D();   // constructor
+    Point2D();   // default constructor
+    Point2D(int x, int y);   // constructor
     ~Point2D();   // destructor
     int getX();   // getter for x
     int getY();   // getter for y
@@ -21,14 +23,20 @@ public:
     bool operator>(Point2D& p);
     bool operator<(Point2D& p);
     void operator=(Point2D& p);
+    friend ostream& operator<<(ostream& os, Point2D p);
     // personal functions
     float d();   // returns distance from (0,0)
 };
 
 // definition of class
-Point2D:: Point2D() {   // constructor
+Point2D:: Point2D() {   // default constructor
     x = 0;
     y = 0;
+}
+
+Point2D:: Point2D(int x, int y) {   // constructor
+    this->x = x;
+    this->y = y;
 }
 
 Point2D:: ~Point2D() {}   // destructor
@@ -55,7 +63,14 @@ void Point2D:: operator=(Point2D& p) {
     this->y = p.y;
 }
 
+ostream& operator<<(ostream& os, Point2D p) {
+    os << p.x << " " << p.y;
+    return os;
+}
+
 // personal functions
 float Point2D:: d() {
     return sqrt(pow(x,2) + pow(y,2));
 }
+
+# endif
