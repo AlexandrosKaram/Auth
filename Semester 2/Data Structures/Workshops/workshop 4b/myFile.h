@@ -7,7 +7,7 @@
 
 class myFile {
     protected:
-        char name[30];
+        char* name;
     public:
         // constructors
         myFile();
@@ -15,11 +15,13 @@ class myFile {
         // name getter
         char* getName();
         // name setter
-        void setName();
+        void setName(char*);
         // methods
         bool exists();
         int countLines();
         int countChars();
         // operators
-        
+        bool operator==(myFile file);
+        myFile operator=(myFile file);
+        myFile operator+=(myFile file);
 };
