@@ -33,8 +33,8 @@ int myFile:: countLines() {
     int cnt = 0;
     std::ifstream file;
 
-    file.open(this->name);
-    
+    file.open(name);
+     
     if (file.is_open()) {
         while (!file.eof()) {
             getline(file, s);
@@ -66,42 +66,42 @@ int myFile:: countChars() {
 
 bool myFile:: operator==(myFile file) {
     std::ifstream f1, f2;
-    f1.open(this->name);
-    f2.open(file.name);
+    f1.open(name);
+    f2.open(file.getName());
 
-    if (f2.is_open() && f1.is_open() &&
+    return (f2.is_open() && f1.is_open() &&
     this->countChars() == file.countChars() &&
-    this->countLines() == file.countLines()) 
-        return true;
-    return false;
+    this->countLines() == file.countLines());
 }
 
 myFile myFile:: operator=(myFile file) {
     std::fstream f1, f2;
-    f1.open(this->name, std::ios:: in);
-    f2.open(file.name, std::ios:: out);
+    f1.open(name, std::ios:: out);
+    f2.open(file.getName(), std::ios:: in);
 
     if (f1.is_open() && f2.is_open()) {
-        while (!f2.eof()) {
-            std::string s; 
-            getline(f2, s);
+        std::string s; 
+        while (getline(f2, s)) {
             f1 << s << "\n";
         }
     }
+    f1.close();
+    f2.close();
     return *this;
 }
 
 myFile myFile:: operator+=(myFile file) {
     std::fstream f1, f2;
-    f1.open(this->name, std::ios::app);
-    f2.open(file.name, std::ios::in);
+    f1.open(name, std::ios::app);
+    f2.open(file.getName(), std::ios::in);
 
     if (f1.is_open() && f2.is_open()) {
-        while (!f2.eof()) {
-            std:: string s;
-            getline(f2, s);
+        std:: string s;
+        while (getline(f2, s)) {
             f1 << s << "\n";
         }
     }
+    f1.close();
+    f2.close();
     return *this;
 }
