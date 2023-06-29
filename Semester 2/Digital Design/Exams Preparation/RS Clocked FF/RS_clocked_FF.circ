@@ -58,11 +58,11 @@
     <a name="simulationFrequency" val="1.0"/>
     <comp lib="0" loc="(110,170)" name="Pin">
       <a name="appearance" val="classic"/>
-      <a name="label" val="S"/>
+      <a name="label" val="R"/>
     </comp>
     <comp lib="0" loc="(110,380)" name="Pin">
       <a name="appearance" val="classic"/>
-      <a name="label" val="R"/>
+      <a name="label" val="S"/>
     </comp>
     <comp lib="0" loc="(140,270)" name="Pin">
       <a name="appearance" val="classic"/>
