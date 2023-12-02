@@ -5,27 +5,26 @@ import java.util.Scanner;
 
 public class HangmanGame {
     private String hiddenWord;
-    private Character[] foundLetters;
+    private char[] foundLetters;
     private ArrayList<Character> lettersLeft;
     private int lives;
 
 
     // Default constructor
     public HangmanGame() {
-        lives = 6;
         initializeGame(new WordGenerator().generateRandomWord());
     }
 
     // Parameterized constructor
     public HangmanGame(String hiddenWord) {
-        lives = 6;
         initializeGame(hiddenWord);
     }
 
     private void initializeGame(String hiddenWord) {
+        lives = 6;
         this.hiddenWord = hiddenWord;
 
-        foundLetters = new Character[hiddenWord.length()];
+        foundLetters = new char[hiddenWord.length()];
         for (int i=0 ; i<hiddenWord.length() ; i++) {
             foundLetters[i] = '_';
         }
@@ -35,6 +34,18 @@ public class HangmanGame {
             lettersLeft.add((char) ('a' + i));
         }
     }
+
+    public char[] getFoundLetters() {
+        char[] foundLettersArray = new char[foundLetters.length];
+        for (int i=0 ; i<foundLetters.length ; i++) {
+            foundLettersArray[i] = foundLetters[i];
+        }
+
+        return foundLettersArray;
+    }
+
+    public int getLives() { return lives; }
+
 
     public void playGame() {
         while (lives > 0 && Arrays.asList(foundLetters).contains('_')) {
@@ -88,5 +99,28 @@ public class HangmanGame {
             System.out.println("You lost... better luck next time:)");
         }
         System.out.println("The word was " + hiddenWord);
+    }
+
+    public void makeGuess(char letter) {
+        boolean found = false;
+
+        for (int i = 0; i < hiddenWord.length(); i++) {
+            if (hiddenWord.charAt(i) == letter) {
+                foundLetters[i] = letter;
+                found = true;
+            }
+        }
+
+        if (!found) {
+            lives--;
+        }
+    }
+
+    public boolean isGameOver() {
+        return lives == 0 || (!Arrays.asList(foundLetters).contains('_'));
+    }
+
+    public boolean isGameWon() {
+        return Arrays.asList(foundLetters).contains('_');
     }
 }
