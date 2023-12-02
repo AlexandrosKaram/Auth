@@ -23,15 +23,21 @@ public class HangmanGame {
         this.hiddenWord = hiddenWord;
 
         foundLetters = new char[hiddenWord.length()];
-        Arrays.fill(foundLetters, '_');
+        for (int i=0 ; i<hiddenWord.length() ; i++){
+            foundLetters[i] = '_';
+        }
 
         letterGuessed = new boolean[26];
-        Arrays.fill(letterGuessed, false);
+        for (int i=0 ; i<26 ; i++) {
+            letterGuessed[i] = false;
+        }
     }
 
     public char[] getFoundLetters() { return Arrays.copyOf(foundLetters, foundLetters.length); }
 
     public int getLives() { return lives; }
+
+    public String getHiddenWord() { return hiddenWord; }
 
     public void makeGuess(char letter) {
         if (!letterGuessed[letter - 'a']) {
@@ -52,10 +58,24 @@ public class HangmanGame {
     }
 
     public boolean isGameOver() {
-        return (lives <= 0 || !(Arrays.asList(foundLetters).contains('_')));
+        boolean found = true;
+        for (char c : foundLetters) {
+            if (c == '_') {
+                found = false;
+                break;
+            }
+        }
+        return lives == 0 || found;
     }
 
     public boolean isGameWon() {
-        return !(Arrays.asList(foundLetters).contains('_'));
+        boolean found = true;
+        for (char c : foundLetters) {
+            if (c == '_') {
+                found = false;
+                break;
+            }
+        }
+        return found;
     }
 }

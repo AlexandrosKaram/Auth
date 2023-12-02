@@ -17,13 +17,14 @@ public class HangmanGUI extends JFrame {
         setTitle("Hangman Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        setResizable(false);
 
         wordLabel = new JLabel(getFormattedWord());
         wordLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(wordLabel, BorderLayout.CENTER);
 
         livesLabel = new JLabel("Lives left: " + hangmanGame.getLives());
-        add(livesLabel, BorderLayout.SOUTH);
+        add(livesLabel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel(new GridLayout(2, 13));
         letterButtons = new JButton[26];
@@ -62,9 +63,11 @@ public class HangmanGUI extends JFrame {
             wordLabel.setText((getFormattedWord()));
             livesLabel.setText("Lives left: " + hangmanGame.getLives());
 
-            if (hangmanGame.isGameOver()) {
-                endGame();
-            }
+            SwingUtilities.invokeLater(() -> {
+                if (hangmanGame.isGameOver()) {
+                    endGame();
+                }
+            });
 
             clickedButton.setEnabled(false);
         }
@@ -74,14 +77,23 @@ public class HangmanGUI extends JFrame {
                 button.setEnabled(false);
             }
 
-            JOptionPane.showMessageDialog(
-                    HangmanGUI.this,
-                    hangmanGame.isGameWon() ? "Congratulations, you won!" :
-                            "You lost... better luck next time :)",
-                    "Game Over",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
+            if (hangmanGame.isGameWon()) {
+                JOptionPane.showMessageDialog(
+                        HangmanGUI.this,
+                        "Congratulations, you won!\nThe hidden word was "+hangmanGame.getHiddenWord(),
+                        "Game Over",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            } else {
+                JOptionPane.showMessageDialog(
+                        HangmanGUI.this,
+                        "You lost... better luck next time :)\nThe hidden word was "+hangmanGame.getHiddenWord(),
+                        "Game Over",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            }
         }
+
 
         public static void main(String[] args) {
             SwingUtilities.invokeLater(() -> new HangmanGUI());
