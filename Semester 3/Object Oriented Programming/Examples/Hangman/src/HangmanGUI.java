@@ -8,8 +8,13 @@ public class HangmanGUI extends JFrame {
     private JLabel wordLabel, livesLabel;
     private JButton[] letterButtons;
 
-    public HangmanGUI() {
-        hangmanGame = new HangmanGame();
+    public HangmanGUI(boolean singlePlayer) {
+        hangmanGame = singlePlayer ? new HangmanGame() : new HangmanGame("");  // Create game with an empty word for MultiPlayer
+        initializeUI();
+    }
+
+    public HangmanGUI(boolean singlePlayer, String word) {
+        hangmanGame = singlePlayer ? new HangmanGame() : new HangmanGame(word);
         initializeUI();
     }
 
@@ -93,10 +98,10 @@ public class HangmanGUI extends JFrame {
                 );
             }
         }
-
-
-        public static void main(String[] args) {
-            SwingUtilities.invokeLater(() -> new HangmanGUI());
-        }
+//
+//
+//        public static void main(String[] args) {
+//            SwingUtilities.invokeLater(() -> new HangmanGUI(true));
+//        }
     }
 }
