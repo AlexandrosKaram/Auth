@@ -82,26 +82,35 @@ public class HangmanGUI extends JFrame {
                 button.setEnabled(false);
             }
 
-            if (hangmanGame.isGameWon()) {
-                JOptionPane.showMessageDialog(
-                        HangmanGUI.this,
-                        "Congratulations, you won!\nThe hidden word was "+hangmanGame.getHiddenWord(),
-                        "Game Over",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
+            int option = JOptionPane.showOptionDialog(
+                    HangmanGUI.this,
+                    hangmanGame.isGameWon() ? "Congratulations, you won!"+"\nThe hidden word was "+ hangmanGame.getHiddenWord()  :
+                            "You lost... better luck next time :)"+"\nThe hidden word was "+ hangmanGame.getHiddenWord(),
+                    "Game Over",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    new Object[]{"Play Again", "Exit"},
+                    "Play Again"
+            );
+
+            if (option == JOptionPane.YES_OPTION) {
+                resetGame();
             } else {
-                JOptionPane.showMessageDialog(
-                        HangmanGUI.this,
-                        "You lost... better luck next time :)\nThe hidden word was "+hangmanGame.getHiddenWord(),
-                        "Game Over",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
+                System.exit(0);
             }
         }
-//
-//
-//        public static void main(String[] args) {
-//            SwingUtilities.invokeLater(() -> new HangmanGUI(true));
-//        }
+
+        private void resetGame() {
+            // Reset the game state
+            hangmanGame = new HangmanGame();
+            wordLabel.setText(getFormattedWord());
+            livesLabel.setText("Lives left: " + hangmanGame.getLives());
+
+            // Enable letter buttons
+            for (JButton button : letterButtons) {
+                button.setEnabled(true);
+            }
+        }
     }
 }
