@@ -10,6 +10,12 @@ public class NormCalculatorGUI extends JFrame {
     private JTextField colsField;
     private DefaultTableModel matrixModel;
     private JTable matrixTable;
+    private JRadioButton oneNormRadioButton;
+    private JRadioButton infNormRadioButton;
+    private JPanel generateNorm;
+    private JButton generateResult;
+    private JTextField normResult;
+
 
     public NormCalculatorGUI() {
         // Set up the JFrame
@@ -45,15 +51,45 @@ public class NormCalculatorGUI extends JFrame {
         // ScrollPane for the matrix table
         JScrollPane scrollPane = new JScrollPane(matrixTable);
 
+        // Radio buttons for norm type
+        oneNormRadioButton = new JRadioButton("One Norm");
+        infNormRadioButton = new JRadioButton("Inf Norm");
+        ButtonGroup normOption = new ButtonGroup();
+        normOption.add(oneNormRadioButton);
+        normOption.add(infNormRadioButton);
+
+        // Text field to show result
+        normResult = new JTextField();
+        normResult.setPreferredSize(new Dimension(50, 20));
+
+        // Button to generate norm
+        generateResult = new JButton("Result");
+        generateResult.addActionListener(e -> {
+                if (oneNormRadioButton.isSelected()) {
+                    normResult.setText(String.valueOf(calculatorLogic.calculateOneNorm()));
+                } else {
+                    normResult.setText(String.valueOf(calculatorLogic.calculateInfNorm()));
+                }
+        });
+
+        generateNorm = new JPanel();
+        generateNorm.add(oneNormRadioButton);
+        generateNorm.add(infNormRadioButton);
+        generateNorm.add(generateResult);
+        generateNorm.add(normResult);
+
+
         // Add components to the JFrame
         add(dimensionPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
+        add(generateNorm, BorderLayout.SOUTH);
 
         // Set frame size
         setSize(400, 300);
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private void createMatrix() {
@@ -78,8 +114,7 @@ public class NormCalculatorGUI extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            NormCalculatorGUI editableMatrixUI = new NormCalculatorGUI();
-            editableMatrixUI.setVisible(true);
+            NormCalculatorGUI normCalculatorGUI = new NormCalculatorGUI();
         });
     }
 }

@@ -17,9 +17,14 @@ public class NormCalculatorLogic {
         this.cols = cols;
         matrix = new double[rows][cols];
 
-        for (int i=0 ; i<rows ; i++) {
+        for (int i = 0; i < rows; i++) {
             Arrays.fill(matrix[i], 0);
         }
+    }
+
+    // New method to set matrix values
+    public void setMatrixValue(int row, int col, double value) {
+        matrix[row][col] = value;
     }
 
     public double calculateOneNorm() {
