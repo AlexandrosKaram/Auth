@@ -8,6 +8,7 @@ public class NormCalculatorGUI extends JFrame {
     private JPanel topSection, midSection, bottomSection;
     private JButton createMatrixButton, calculateNormButton;
     private JTable matrixTable;
+    private JRadioButton oneNormRadioButton, infNormRadioButton;
 
     public NormCalculatorGUI() {
         // Initialize UI
@@ -32,6 +33,11 @@ public class NormCalculatorGUI extends JFrame {
 
         // Set up bottom-section components
         bottomSection = new JPanel();
+        oneNormRadioButton = new JRadioButton("One Norm", true);
+        infNormRadioButton = new JRadioButton("Inf Norm", false);
+        ButtonGroup group = new ButtonGroup();
+        group.add(oneNormRadioButton);
+        group.add(infNormRadioButton);
         calculateNormButton = new JButton("Calculate");
         resultField = new JTextField(5);
 
@@ -46,6 +52,8 @@ public class NormCalculatorGUI extends JFrame {
         midSection.add(matrixTable);
 
         // Add components to bottom-section
+        bottomSection.add(oneNormRadioButton);
+        bottomSection.add(infNormRadioButton);
         bottomSection.add(calculateNormButton);
         bottomSection.add(resultField);
 
@@ -71,7 +79,14 @@ public class NormCalculatorGUI extends JFrame {
         calculateNormButton.addActionListener(e -> {
             parseContentToApi();
 
-            resultField.setText(String.valueOf(normCalculator.calculateOneNorm()));
+            if (oneNormRadioButton.isSelected()) {
+                resultField.setText(String.valueOf(normCalculator.calculateOneNorm()));
+            } else {
+                resultField.setText(String.valueOf(normCalculator.calculateInfNorm()));
+            }
+
+            // testing
+            normCalculator.printMatrix();
         });
 
         // Add sections to frame
