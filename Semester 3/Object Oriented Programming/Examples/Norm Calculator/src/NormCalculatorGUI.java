@@ -1,120 +1,106 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class NormCalculatorGUI extends JFrame {
-    private NormCalculatorLogic calculatorLogic;
-    private JTextField rowsField;
-    private JTextField colsField;
-    private DefaultTableModel matrixModel;
+    private NormCalculator normCalculator;
+    private JTextField rowsField, colsField, resultField;
+    private JPanel topSection, midSection, bottomSection;
+    private JButton createMatrixButton, calculateNormButton;
     private JTable matrixTable;
-    private JRadioButton oneNormRadioButton;
-    private JRadioButton infNormRadioButton;
-    private JPanel generateNorm;
-    private JButton generateResult;
-    private JTextField normResult;
-
 
     public NormCalculatorGUI() {
-        // Set up the JFrame
+        // Initialize UI
+        setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Norm Calculator");
+        setSize(new Dimension(400, 300));
         setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
 
-        // Create an instance of NormCalculatorLogic
-        calculatorLogic = new NormCalculatorLogic();
-
-        // Panel for entering matrix dimensions
-        JPanel dimensionPanel = new JPanel();
+        // Set up top-section components
+        topSection = new JPanel();
         rowsField = new JTextField(5);
         colsField = new JTextField(5);
-        JButton createMatrixButton = new JButton("Create Matrix");
-        createMatrixButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                createMatrix();
-            }
-        });
-        dimensionPanel.add(new JLabel("Rows:"));
-        dimensionPanel.add(rowsField);
-        dimensionPanel.add(new JLabel("Cols:"));
-        dimensionPanel.add(colsField);
-        dimensionPanel.add(createMatrixButton);
+        createMatrixButton = new JButton("Create Matrix");
 
-        // Matrix Table
-        matrixModel = new DefaultTableModel();
-        matrixTable = new JTable(matrixModel);
-        matrixTable.setCellSelectionEnabled(true);
+        // Set up mid-section components
+        midSection = new JPanel();
+        // Create table
+        DefaultTableModel model = new DefaultTableModel();
+        matrixTable = new JTable(model);
 
-        // ScrollPane for the matrix table
-        JScrollPane scrollPane = new JScrollPane(matrixTable);
+        // Set up bottom-section components
+        bottomSection = new JPanel();
+        calculateNormButton = new JButton("Calculate");
+        resultField = new JTextField(5);
 
-        // Radio buttons for norm type
-        oneNormRadioButton = new JRadioButton("One Norm");
-        infNormRadioButton = new JRadioButton("Inf Norm");
-        ButtonGroup normOption = new ButtonGroup();
-        normOption.add(oneNormRadioButton);
-        normOption.add(infNormRadioButton);
+        // Add components to top-section
+        topSection.add(new JLabel("Rows: "));
+        topSection.add(rowsField);
+        topSection.add(new JLabel("Cols: "));
+        topSection.add(colsField);
+        topSection.add(createMatrixButton);
 
-        // Text field to show result
-        normResult = new JTextField();
-        normResult.setPreferredSize(new Dimension(50, 20));
+        // Add components to mid-section
+        midSection.add(matrixTable);
 
-        // Button to generate norm
-        generateResult = new JButton("Result");
-        generateResult.addActionListener(e -> {
-                if (oneNormRadioButton.isSelected()) {
-                    normResult.setText(String.valueOf(calculatorLogic.calculateOneNorm()));
-                } else {
-                    normResult.setText(String.valueOf(calculatorLogic.calculateInfNorm()));
-                }
-        });
+        // Add components to bottom-section
+        bottomSection.add(calculateNormButton);
+        bottomSection.add(resultField);
 
-        generateNorm = new JPanel();
-        generateNorm.add(oneNormRadioButton);
-        generateNorm.add(infNormRadioButton);
-        generateNorm.add(generateResult);
-        generateNorm.add(normResult);
-
-
-        // Add components to the JFrame
-        add(dimensionPanel, BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
-        add(generateNorm, BorderLayout.SOUTH);
-
-        // Set frame size
-        setSize(400, 300);
-
-        // Center the frame on the screen
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
-
-    private void createMatrix() {
-        try {
+        // Event listener for createMatrixButton
+        createMatrixButton.addActionListener(e -> {
+            // Parse text from textField
             int rows = Integer.parseInt(rowsField.getText());
             int cols = Integer.parseInt(colsField.getText());
 
-            calculatorLogic.initializeMatrix(rows, cols);
+            // back-end
+            normCalculator = new NormCalculator(rows, cols);
 
-            matrixModel.setColumnCount(cols);
-            matrixModel.setRowCount(rows);
+            // front-end
+            DefaultTableModel tableModel = new DefaultTableModel(rows, cols);
+            matrixTable.setModel(tableModel);
+            initializeTable();
 
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    matrixModel.setValueAt(calculatorLogic.matrix[i][j], i, j);
-                }
+            // testing
+            normCalculator.printMatrix();
+        });
+
+        // Event listener for calculateNormButton
+        calculateNormButton.addActionListener(e -> {
+            parseContentToApi();
+
+            resultField.setText(String.valueOf(normCalculator.calculateOneNorm()));
+        });
+
+        // Add sections to frame
+        add(topSection, BorderLayout.NORTH);
+        add(midSection, BorderLayout.CENTER);
+        add(bottomSection, BorderLayout.SOUTH);
+    }
+
+
+    private void initializeTable() {
+        for (int i = 0; i < matrixTable.getRowCount(); i++) {
+            for (int j = 0; j < matrixTable.getColumnCount(); j++) {
+                matrixTable.setValueAt(0, i, j);
             }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Invalid input. Please enter valid integer values for rows and columns.");
+        }
+    }
+
+    private void parseContentToApi() {
+        for (int i = 0; i < matrixTable.getRowCount(); i++) {
+            for (int j = 0; j < matrixTable.getColumnCount(); j++) {
+                double value = Double.parseDouble(matrixTable.getValueAt(i, j).toString());
+                normCalculator.setValueAt(value, i, j);
+            }
         }
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            NormCalculatorGUI normCalculatorGUI = new NormCalculatorGUI();
+        SwingUtilities.invokeLater( () -> {
+            new NormCalculatorGUI();
         });
     }
 }
