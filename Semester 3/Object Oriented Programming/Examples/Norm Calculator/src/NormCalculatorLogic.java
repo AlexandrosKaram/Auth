@@ -1,8 +1,8 @@
 import java.util.Arrays;
 
 public class NormCalculatorLogic {
-    int rows, cols;
-    double[][] matrix;
+    public int rows, cols;
+    public double[][] matrix;
 
     public NormCalculatorLogic() {
         initializeMatrix(2, 2);
